@@ -40,8 +40,8 @@ export default class Instructions {
         const direction = this.directions = directions[routeIndex];
 
         if (compile) {
-          direction.legs.forEach(function(leg) {
-            leg.steps.forEach(function(step) {
+          direction.legs.forEach(function (leg) {
+            leg.steps.forEach(function (step) {
               step.maneuver.instruction = compile('en', step);
             });
           });
@@ -71,10 +71,10 @@ export default class Instructions {
           });
 
           el.addEventListener('click', () => {
-            this._map.flyTo({
+            /*this._map.flyTo({
               center: [lng, lat],
               zoom: 16
-            });
+            });*/
           });
         });
 

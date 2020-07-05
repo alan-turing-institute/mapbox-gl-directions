@@ -37,20 +37,20 @@ export default class Inputs {
 
   animateToCoordinates(mode, coords) {
     const { origin, destination, routePadding } = this.store.getState();
-    
-    if (origin.geometry &&
-        destination.geometry &&
-        !isEqual(origin.geometry, destination.geometry)) {
+
+    /*if (origin.geometry &&
+      destination.geometry &&
+      !isEqual(origin.geometry, destination.geometry)) {
       // Animate map to fit bounds.
       const bb = extent({
         type: 'FeatureCollection',
         features: [origin, destination]
       });
 
-      this._map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], {padding: routePadding});
+      this._map.fitBounds([[bb[0], bb[1]], [bb[2], bb[3]]], { padding: routePadding });
     } else {
       this._map.flyTo({ center: coords });
-    }
+    }*/
   }
 
   onAdd() {
@@ -67,7 +67,7 @@ export default class Inputs {
 
     this.originInput = new Geocoder(Object.assign({}, {
       accessToken
-    }, geocoder, {flyTo, placeholder: placeholderOrigin, zoom}));
+    }, geocoder, { flyTo, placeholder: placeholderOrigin, zoom }));
 
     const originEl = this.originInput.onAdd(this._map);
     const originContainerEl = this.container.querySelector('#mapbox-directions-origin-input');
@@ -75,7 +75,7 @@ export default class Inputs {
 
     this.destinationInput = new Geocoder(Object.assign({}, {
       accessToken
-    }, geocoder, {flyTo, placeholder: placeholderDestination, zoom}));
+    }, geocoder, { flyTo, placeholder: placeholderDestination, zoom }));
 
     const destinationEl = this.destinationInput.onAdd(this._map);
     this.container.querySelector('#mapbox-directions-destination-input').appendChild(destinationEl);
