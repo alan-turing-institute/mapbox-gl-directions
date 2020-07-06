@@ -52,7 +52,7 @@ function setHoverMarker(feature) {
 
 function fetchDirections() {
   return (dispatch, getState) => {
-    const { api, accessToken, routeIndex, profile, alternatives, congestion, destination, language, exclude } = getState();
+    /*const { api, accessToken, routeIndex, profile, alternatives, congestion, destination, language, exclude } = getState();
     // if there is no destination set, do not make request because it will fail
     if (!(destination && destination.geometry)) return;
 
@@ -65,11 +65,11 @@ function fetchDirections() {
     if (congestion) options.push('annotations=congestion');
     options.push('steps=true');
     options.push('overview=full');
-    if (language) options.push('language='+language);
+    if (language) options.push('language=' + language);
     if (exclude) options.push('exclude=' + exclude);
     if (accessToken) options.push('access_token=' + accessToken);
     request.abort();
-    request.open('GET', `${api}${profile}/${query}.json?${options.join('&')}`, true);
+    //request.open('GET', `${api}${profile}/${query}.json?${options.join('&')}`, true);
 
     request.onload = () => {
       if (request.status >= 200 && request.status < 400) {
@@ -95,9 +95,9 @@ function fetchDirections() {
     request.onerror = () => {
       dispatch(setDirections([]));
       return dispatch(setError(JSON.parse(request.responseText).message));
-    };
-
-    request.send();
+    };*/
+    window.getRoute();
+    //request.send();
   };
 }
 
@@ -201,7 +201,7 @@ export function setOptions(options) {
 
 export function hoverMarker(coordinates) {
   return (dispatch) => {
-    const feature = (coordinates) ? utils.createPoint(coordinates, { id: 'hover'}) : {};
+    const feature = (coordinates) ? utils.createPoint(coordinates, { id: 'hover' }) : {};
     dispatch(setHoverMarker(feature));
   };
 }
@@ -217,7 +217,7 @@ export function createOrigin(coordinates) {
   return (dispatch, getState) => {
     const { destination } = getState();
     dispatch(originPoint(coordinates));
-    if (destination.geometry) dispatch(fetchDirections());
+    //if (destination.geometry) dispatch(fetchDirections());
   };
 }
 
@@ -225,7 +225,7 @@ export function createDestination(coordinates) {
   return (dispatch, getState) => {
     const { origin } = getState();
     dispatch(destinationPoint(coordinates));
-    if (origin.geometry) dispatch(fetchDirections());
+    //if (origin.geometry) dispatch(fetchDirections());
   };
 }
 
@@ -296,12 +296,12 @@ export function setWaypoint(index, waypoint) {
 export function removeWaypoint(waypoint) {
   return (dispatch, getState) => {
     let { destination, waypoints } = getState();
-      waypoints = waypoints.filter((way) => {
-        return !utils.coordinateMatch(way, waypoint);
-      });
+    waypoints = waypoints.filter((way) => {
+      return !utils.coordinateMatch(way, waypoint);
+    });
 
-      dispatch(updateWaypoints(waypoints));
-      if (destination.geometry) dispatch(fetchDirections());
+    dispatch(updateWaypoints(waypoints));
+    if (destination.geometry) dispatch(fetchDirections());
   };
 }
 

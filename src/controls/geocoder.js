@@ -103,7 +103,7 @@ export default class Geocoder {
     var accessToken = this.options.accessToken ? this.options.accessToken : mapboxgl.accessToken;
     options.push('access_token=' + accessToken);
     this.request.abort();
-    this.request.open('GET', this.api + encodeURIComponent(q.trim()) + '.json?' + options.join('&'), true);
+    this.request.open('GET', this.api + encodeURIComponent(q.trim()) + '.json?' + options.join('&') + `&bbox=-0.489,51.28,0.236,51.686`, true);
     this.request.onload = function () {
       this._loadingEl.classList.remove('active');
       if (this.request.status >= 200 && this.request.status < 400) {

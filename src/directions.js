@@ -396,6 +396,7 @@ export default class MapboxDirections {
 
     this._map.off('mousemove', this.onDragMove);
     this._map.off('mouseup', this.onDragUp);
+    window.getRoute();
   }
 
   // API Methods
