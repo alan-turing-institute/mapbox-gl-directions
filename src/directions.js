@@ -303,6 +303,7 @@ export default class MapboxDirections {
         //this._map.flyTo({ center: coords });
       }
     }
+    //window.getRoute();
   }
 
   _move(e) {
@@ -357,10 +358,10 @@ export default class MapboxDirections {
     const coords = [e.lngLat.lng, e.lngLat.lat];
     switch (this.isDragging.layer.id) {
       case 'directions-origin-point':
-        this.actions.createOrigin(coords);
+        this.actions.createOriginWithoutDirections(coords);
         break;
       case 'directions-destination-point':
-        this.actions.createDestination(coords);
+        this.actions.createDestinationWithoutDirections(coords);
         break;
       case 'directions-hover-point':
         this.actions.hoverMarker(coords);
@@ -396,7 +397,7 @@ export default class MapboxDirections {
 
     this._map.off('mousemove', this.onDragMove);
     this._map.off('mouseup', this.onDragUp);
-    window.getRoute();
+    //window.getRoute();
   }
 
   // API Methods

@@ -217,11 +217,27 @@ export function createOrigin(coordinates) {
   return (dispatch, getState) => {
     const { destination } = getState();
     dispatch(originPoint(coordinates));
-    //if (destination.geometry) dispatch(fetchDirections());
+    if (destination.geometry) dispatch(fetchDirections());
   };
 }
 
 export function createDestination(coordinates) {
+  return (dispatch, getState) => {
+    const { origin } = getState();
+    dispatch(destinationPoint(coordinates));
+    if (origin.geometry) dispatch(fetchDirections());
+  };
+}
+
+export function createOriginWithoutDirections(coordinates) {
+  return (dispatch, getState) => {
+    const { destination } = getState();
+    dispatch(originPoint(coordinates));
+    //if (destination.geometry) dispatch(fetchDirections());
+  };
+}
+
+export function createDestinationWithoutDirections(coordinates) {
   return (dispatch, getState) => {
     const { origin } = getState();
     dispatch(destinationPoint(coordinates));
